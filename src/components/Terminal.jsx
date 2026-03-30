@@ -81,23 +81,28 @@ const COMMANDS = {
 
   'sudo hire': () => [
     '',
-    '  ✓ Permission granted.',
+    '✓ Permission granted.',
     '',
-    "  Let's build something great together.",
-    '  → benhur@example.com',
+    "Let's build something great together.",
+    '→ benhur@example.com',
     '',
   ],
 }
 
 export default function Terminal() {
   const [lines, setLines] = useState([
-    'Welcome to benhur.dev — Type "help" to get started.',
+    'booting system...',
+    'loading modules...',
+    'ready.',
+    '',
+    'Type "help" to begin.',
     '',
   ])
   const [input, setInput] = useState('')
   const [history, setHistory] = useState([])
   const [historyIndex, setHistoryIndex] = useState(-1)
   const [isAnimating, setIsAnimating] = useState(false)
+
   const containerRef = useRef(null)
   const inputRef = useRef(null)
 
@@ -111,18 +116,15 @@ export default function Terminal() {
     scrollToBottom()
   }, [lines, scrollToBottom])
 
-  const typeOutput = useCallback(
-    async (outputLines) => {
-      setIsAnimating(true)
-      for (const line of outputLines) {
-        await new Promise((resolve) => setTimeout(resolve, 30))
-        setLines((prev) => [...prev, line])
-      }
-      setLines((prev) => [...prev, ''])
-      setIsAnimating(false)
-    },
-    []
-  )
+  const typeOutput = useCallback(async (outputLines) => {
+    setIsAnimating(true)
+    for (const line of outputLines) {
+      await new Promise((resolve) => setTimeout(resolve, 25))
+      setLines((prev) => [...prev, line])
+    }
+    setLines((prev) => [...prev, ''])
+    setIsAnimating(false)
+  }, [])
 
   const handleSubmit = useCallback(
     (e) => {
@@ -130,10 +132,11 @@ export default function Terminal() {
       if (isAnimating) return
 
       const trimmed = input.trim().toLowerCase()
+
       setLines((prev) => [...prev, PROMPT + input])
       setInput('')
 
-      if (trimmed === '') {
+      if (!trimmed) {
         setLines((prev) => [...prev, ''])
         return
       }
@@ -147,11 +150,14 @@ export default function Terminal() {
       }
 
       const handler = COMMANDS[trimmed]
+
       if (handler) {
-        const output = handler()
-        typeOutput(output)
+        typeOutput(handler())
       } else {
-        typeOutput([`command not found: ${trimmed}`, 'Type "help" for available commands.'])
+        typeOutput([
+          `command not found: ${trimmed}`,
+          'Type "help" for available commands.',
+        ])
       }
     },
     [input, isAnimating, typeOutput]
@@ -163,17 +169,24 @@ export default function Terminal() {
         e.preventDefault()
         return
       }
+
       if (e.key === 'ArrowUp') {
         e.preventDefault()
-        if (history.length === 0) return
+        if (!history.length) return
+
         const newIndex =
           historyIndex === -1 ? history.length - 1 : Math.max(0, historyIndex - 1)
+
         setHistoryIndex(newIndex)
         setInput(history[newIndex])
-      } else if (e.key === 'ArrowDown') {
+      }
+
+      if (e.key === 'ArrowDown') {
         e.preventDefault()
         if (historyIndex === -1) return
+
         const newIndex = historyIndex + 1
+
         if (newIndex >= history.length) {
           setHistoryIndex(-1)
           setInput('')
@@ -196,74 +209,78 @@ export default function Terminal() {
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
-        transition={{ duration: 0.5 }}
-        className="w-full max-w-3xl mx-auto"
+        className="w-full max-w-[900px] mx-auto"
       >
-        {/* Title bar */}
-        <div className="bg-[#1a1a1a] border border-[#333] border-b-0 rounded-t-lg px-4 py-2.5 flex items-center gap-2">
-          <div className="flex items-center gap-1.5">
-            <div className="w-3 h-3 rounded-full bg-[#ff5f57]" />
-            <div className="w-3 h-3 rounded-full bg-[#febc2e]" />
-            <div className="w-3 h-3 rounded-full bg-[#28c840]" />
-          </div>
-          <span className="font-mono text-xs text-[#666] ml-3 select-none">
-            benhur@dev: ~
-          </span>
-        </div>
+        {/* Terminal Window */}
+        <div className="rounded-xl border border-white/10 bg-black/80 backdrop-blur overflow-hidden">
 
-        {/* Terminal body */}
-        <div
-          ref={containerRef}
-          onClick={focusInput}
-          className="bg-black border border-[#333] border-t-0 rounded-b-lg p-4 h-72 sm:h-96 lg:h-[500px] overflow-y-auto cursor-text"
-        >
-          {lines.map((line, i) => (
-            <div key={i} className="font-mono text-xs sm:text-sm leading-6">
-              {line.startsWith(PROMPT) ? (
-                <>
-                  <span className="text-[#4ade80]">benhur</span>
-                  <span className="text-[#666]">@</span>
-                  <span className="text-[#38bdf8]">dev</span>
-                  <span className="text-[#666]">:</span>
-                  <span className="text-[#a78bfa]">~</span>
-                  <span className="text-[#666]">$ </span>
-                  <span className="text-[#e5e5e5]">
-                    {line.slice(PROMPT.length)}
-                  </span>
-                </>
-              ) : (
-                <span className="text-[#999]">{line}</span>
-              )}
+          {/* Title Bar */}
+          <div className="flex items-center justify-between px-4 py-2 border-b border-white/10 bg-white/5">
+            <div className="flex gap-2">
+              <div className="w-2.5 h-2.5 rounded-full bg-red-500/80" />
+              <div className="w-2.5 h-2.5 rounded-full bg-yellow-400/80" />
+              <div className="w-2.5 h-2.5 rounded-full bg-green-500/80" />
             </div>
-          ))}
+            <span className="font-mono text-[11px] text-white/40">
+              terminal - bash
+            </span>
+          </div>
 
-          {/* Input line */}
-          <div className="flex items-center font-mono text-xs sm:text-sm leading-6">
-            <span className="text-[#4ade80]">benhur</span>
-            <span className="text-[#666]">@</span>
-            <span className="text-[#38bdf8]">dev</span>
-            <span className="text-[#666]">:</span>
-            <span className="text-[#a78bfa]">~</span>
-            <span className="text-[#666]">$ </span>
-            <form onSubmit={handleSubmit} className="flex-1 flex items-center">
-              <input
-                ref={inputRef}
-                type="text"
-                value={input}
-                onChange={(e) => setInput(e.target.value)}
-                onKeyDown={handleKeyDown}
-                disabled={isAnimating}
-                autoComplete="off"
-                spellCheck="false"
-                className="flex-1 bg-transparent text-[#e5e5e5] outline-none font-mono text-xs sm:text-sm caret-[#4ade80]"
-              />
-            </form>
-            <span className="w-2 h-4 bg-[#4ade80] animate-pulse ml-0.5" />
+          {/* Body */}
+          <div
+            ref={containerRef}
+            onClick={focusInput}
+            className="p-4 sm:p-5 h-[260px] sm:h-[340px] md:h-[420px] overflow-y-auto font-mono text-[11px] sm:text-xs leading-6 cursor-text"
+          >
+            {lines.map((line, i) => (
+              <div key={i} className="whitespace-pre-wrap break-words">
+                {line.startsWith(PROMPT) ? (
+                  <>
+                    <span className="text-white">meru</span>
+                    <span className="text-white/40">@</span>
+                    <span className="text-white/70">dev</span>
+                    <span className="text-white/40">:</span>
+                    <span className="text-white/60">~</span>
+                    <span className="text-white/40">$ </span>
+                    <span className="text-white/80">
+                      {line.slice(PROMPT.length)}
+                    </span>
+                  </>
+                ) : (
+                  <span className="text-white/60">{line}</span>
+                )}
+              </div>
+            ))}
+
+            {/* Input */}
+            <div className="flex items-center">
+              <span className="text-white">benhur</span>
+              <span className="text-white/40">@</span>
+              <span className="text-white/70">dev</span>
+              <span className="text-white/40">:</span>
+              <span className="text-white/60">~</span>
+              <span className="text-white/40">$ </span>
+
+              <form onSubmit={handleSubmit} className="flex-1">
+                <input
+                  ref={inputRef}
+                  value={input}
+                  onChange={(e) => setInput(e.target.value)}
+                  onKeyDown={handleKeyDown}
+                  disabled={isAnimating}
+                  autoComplete="off"
+                  spellCheck="false"
+                  className="w-full bg-transparent outline-none text-white caret-white"
+                />
+              </form>
+
+              <span className="ml-1 w-[6px] h-[14px] bg-white animate-pulse" />
+            </div>
           </div>
         </div>
 
-        <p className="font-mono text-xs text-text-muted mt-4 text-center">
-          Try: help, whoami, cat skills, sudo hire
+        <p className="font-mono text-[11px] text-white/40 mt-4 text-center">
+          try: help · whoami · cat skills · sudo hire
         </p>
       </motion.div>
     </SectionWrapper>

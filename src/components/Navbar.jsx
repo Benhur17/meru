@@ -36,16 +36,20 @@ export default function Navbar() {
             : 'bg-transparent'
         }`}
       >
-        {/* 🔥 Consistent container */}
-        <div className="w-full max-w-[1200px] mx-auto px-[clamp(1rem,4vw,2.5rem)] h-16 flex items-center justify-between">
+        {/* ✅ FIXED container */}
+        <div className="
+          w-full h-14 flex items-center justify-between
+          px-4 sm:px-6 md:px-[clamp(1rem,4vw,2.5rem)]
+          max-w-none md:max-w-[1200px] md:mx-auto
+        ">
 
           {/* Logo */}
           <a
             href="#hero"
-            className="font-mono text-xs tracking-wider text-white/80 hover:text-white transition"
+            className="font-mono text-[11px] tracking-wider text-white/80"
           >
             <span className="opacity-60">meru@dev:</span>
-            <span className="text-white">~</span>
+            ~
             <span className="ml-1 animate-pulse">█</span>
           </a>
 
@@ -66,7 +70,7 @@ export default function Navbar() {
           {/* CTA */}
           <a
             href="#contact"
-            className="hidden md:inline-flex text-xs font-mono px-4 py-2 rounded border border-white/10 text-white/80 hover:bg-white/5 transition"
+            className="hidden md:inline-flex text-xs font-mono px-4 py-2 border border-white/10 text-white/80 hover:bg-white/5 transition"
           >
             contact()
           </a>
@@ -74,34 +78,33 @@ export default function Navbar() {
           {/* Mobile button */}
           <button
             onClick={() => setMobileOpen(!mobileOpen)}
-            className="md:hidden w-8 h-8 flex flex-col items-center justify-center gap-1.5"
+            className="md:hidden w-7 h-7 flex flex-col items-center justify-center gap-1.5"
           >
-            <span
-              className={`w-5 h-px bg-white transition-all duration-300 ${
-                mobileOpen ? 'rotate-45 translate-y-[3.5px]' : ''
-              }`}
-            />
-            <span
-              className={`w-5 h-px bg-white transition-all duration-300 ${
-                mobileOpen ? '-rotate-45 -translate-y-[3.5px]' : ''
-              }`}
-            />
+            <span className={`w-5 h-px bg-white transition ${mobileOpen ? 'rotate-45 translate-y-[3px]' : ''}`} />
+            <span className={`w-5 h-px bg-white transition ${mobileOpen ? '-rotate-45 -translate-y-[3px]' : ''}`} />
           </button>
         </div>
       </motion.nav>
 
-      {/* Mobile menu */}
+      {/* ✅ MOBILE MENU (FIXED) */}
       <AnimatePresence>
         {mobileOpen && (
           <motion.div
-            initial={{ opacity: 0, y: -10 }}
+            initial={{ opacity: 0, y: -8 }}
             animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -10 }}
-            className="fixed top-16 left-0 right-0 bg-black/95 backdrop-blur-xl z-40 border-b border-white/5"
+            exit={{ opacity: 0, y: -8 }}
+            className="fixed top-14 left-0 right-0 z-40 flex justify-center px-4"
           >
-            {/* 🔥 SAME padding here */}
-            <div className="max-w-[1200px] mx-auto px-[clamp(1rem,4vw,2.5rem)] py-6 flex flex-col gap-5 font-mono text-sm">
-
+            {/* 🔥 centered panel instead of stretched */}
+            <div className="
+              w-full max-w-sm
+              bg-black/95 backdrop-blur-xl
+              border border-white/10
+              rounded-xl
+              p-5
+              flex flex-col gap-4
+              font-mono text-sm
+            ">
               {navLinks.map((link) => (
                 <a
                   key={link.href}
@@ -109,14 +112,14 @@ export default function Navbar() {
                   onClick={() => setMobileOpen(false)}
                   className="text-white/70 hover:text-white transition"
                 >
-                  {'> '}{link.label}
+                  {'> '} {link.label}
                 </a>
               ))}
 
               <a
                 href="#contact"
                 onClick={() => setMobileOpen(false)}
-                className="mt-2 px-4 py-2 border border-white/10 text-white/80 text-center"
+                className="mt-2 px-4 py-2 border border-white/10 text-white/80 text-center rounded"
               >
                 contact()
               </a>
