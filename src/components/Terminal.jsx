@@ -3,7 +3,7 @@ import { motion } from 'framer-motion'
 import SectionWrapper from './SectionWrapper'
 import SectionHeader from './SectionHeader'
 
-const PROMPT = 'benhur@dev:~$ '
+const PROMPT = 'meru@dev:~$ '
 
 const COMMANDS = {
   help: () => [
@@ -18,13 +18,13 @@ const COMMANDS = {
     '  resume        Open resume',
     '  contact       Show contact info',
     '  clear         Clear terminal',
-    '  sudo hire     🤝',
+    '  sudo hire     ?',
     '',
     'Use ↑ ↓ to navigate command history.',
   ],
 
   whoami: () => [
-    'Benhur — Computer Science Engineer',
+    'Meru - Computer Science Engineer',
     'Full Stack Developer | Systems Thinker | Open Source Contributor',
     '',
     'I build performant, accessible software with precision.',
@@ -65,16 +65,16 @@ const COMMANDS = {
     setTimeout(() => {
       const link = document.createElement('a')
       link.href = '/resume.pdf'
-      link.download = 'Benhur_Resume.pdf'
+      link.download = 'meru_resume.pdf'
       link.click()
     }, 300)
     return ['Downloading resume...']
   },
 
   contact: () => [
-    'Email     benhur@example.com',
-    'GitHub    github.com/benhur',
-    'LinkedIn  linkedin.com/in/benhur',
+    'Email     meru@gmail.com',
+    'GitHub    github.com/meru',
+    'LinkedIn  linkedin.com/in/meru',
     '',
     'Feel free to reach out!',
   ],
@@ -84,7 +84,7 @@ const COMMANDS = {
     '✓ Permission granted.',
     '',
     "Let's build something great together.",
-    '→ benhur@example.com',
+    '→ meru@gmail.com',
     '',
   ],
 }
@@ -175,7 +175,9 @@ export default function Terminal() {
         if (!history.length) return
 
         const newIndex =
-          historyIndex === -1 ? history.length - 1 : Math.max(0, historyIndex - 1)
+          historyIndex === -1
+            ? history.length - 1
+            : Math.max(0, historyIndex - 1)
 
         setHistoryIndex(newIndex)
         setInput(history[newIndex])
@@ -202,86 +204,104 @@ export default function Terminal() {
   const focusInput = () => inputRef.current?.focus()
 
   return (
+    
     <SectionWrapper id="terminal">
+    
       <SectionHeader label="// terminal" title="Interactive Shell" />
 
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
-        className="w-full max-w-[900px] mx-auto"
+        className="w-full flex justify-center px-4 sm:px-6 md:px-0"
       >
-        {/* Terminal Window */}
-        <div className="rounded-xl border border-white/10 bg-black/80 backdrop-blur overflow-hidden">
+        <div className="w-full max-w-[1100px]">
 
-          {/* Title Bar */}
-          <div className="flex items-center justify-between px-4 py-2 border-b border-white/10 bg-white/5">
-            <div className="flex gap-2">
-              <div className="w-2.5 h-2.5 rounded-full bg-red-500/80" />
-              <div className="w-2.5 h-2.5 rounded-full bg-yellow-400/80" />
-              <div className="w-2.5 h-2.5 rounded-full bg-green-500/80" />
-            </div>
-            <span className="font-mono text-[11px] text-white/40">
-              terminal - bash
-            </span>
-          </div>
+          {/* Terminal Window */}
+          <div className="rounded-xl border border-white/10 bg-black/80 backdrop-blur overflow-hidden shadow-[0_0_0_1px_rgba(255,255,255,0.03)]">
 
-          {/* Body */}
-          <div
-            ref={containerRef}
-            onClick={focusInput}
-            className="p-4 sm:p-5 h-[260px] sm:h-[340px] md:h-[420px] overflow-y-auto font-mono text-[11px] sm:text-xs leading-6 cursor-text"
-          >
-            {lines.map((line, i) => (
-              <div key={i} className="whitespace-pre-wrap break-words">
-                {line.startsWith(PROMPT) ? (
-                  <>
-                    <span className="text-white">meru</span>
-                    <span className="text-white/40">@</span>
-                    <span className="text-white/70">dev</span>
-                    <span className="text-white/40">:</span>
-                    <span className="text-white/60">~</span>
-                    <span className="text-white/40">$ </span>
-                    <span className="text-white/80">
-                      {line.slice(PROMPT.length)}
-                    </span>
-                  </>
-                ) : (
-                  <span className="text-white/60">{line}</span>
-                )}
+            {/* Title Bar */}
+            <div className="flex items-center justify-between px-4 py-2 border-b border-white/10 bg-white/5">
+              <div className="flex gap-2">
+                <div className="w-2.5 h-2.5 rounded-full bg-red-500/80" />
+                <div className="w-2.5 h-2.5 rounded-full bg-yellow-400/80" />
+                <div className="w-2.5 h-2.5 rounded-full bg-green-500/80" />
               </div>
-            ))}
+              <span className="font-mono text-[11px] text-white/40">
+                terminal — bash
+              </span>
+            </div>
 
-            {/* Input */}
-            <div className="flex items-center">
-              <span className="text-white">benhur</span>
-              <span className="text-white/40">@</span>
-              <span className="text-white/70">dev</span>
-              <span className="text-white/40">:</span>
-              <span className="text-white/60">~</span>
-              <span className="text-white/40">$ </span>
+            {/* Body */}
+            <div
+              ref={containerRef}
+              onClick={focusInput}
+              className="
+                px-4 sm:px-6
+                py-4 sm:py-5
+                h-[260px] 
+                sm:h-[340px] 
+                md:h-[480px]
+                lg:h-[560px]
+                overflow-y-auto
+                font-mono
+                text-[11px] sm:text-xs
+                leading-6
+                cursor-text
+              "
+            >
+              {lines.map((line, i) => (
+                <div key={i} className="whitespace-pre-wrap break-words">
+                  {line.startsWith(PROMPT) ? (
+                    <>
+                      <span className="text-white">meru</span>
+                      <span className="text-white/40">@</span>
+                      <span className="text-white/70">dev</span>
+                      <span className="text-white/40">:</span>
+                      <span className="text-white/60">~</span>
+                      <span className="text-white/40">$ </span>
+                      <span className="text-white/80">
+                        {line.slice(PROMPT.length)}
+                      </span>
+                    </>
+                  ) : (
+                    <span className="text-white/60">{line}</span>
+                  )}
+                </div>
+              ))}
 
-              <form onSubmit={handleSubmit} className="flex-1">
-                <input
-                  ref={inputRef}
-                  value={input}
-                  onChange={(e) => setInput(e.target.value)}
-                  onKeyDown={handleKeyDown}
-                  disabled={isAnimating}
-                  autoComplete="off"
-                  spellCheck="false"
-                  className="w-full bg-transparent outline-none text-white caret-white"
-                />
-              </form>
+              {/* Input */}
+              <div className="flex items-center">
+                <span className="text-white">meru</span>
+                <span className="text-white/40">@</span>
+                <span className="text-white/70">dev</span>
+                <span className="text-white/40">:</span>
+                <span className="text-white/60">~</span>
+                <span className="text-white/40">$ </span>
 
-              <span className="ml-1 w-[6px] h-[14px] bg-white animate-pulse" />
+                <form onSubmit={handleSubmit} className="flex-1">
+                  <input
+                    ref={inputRef}
+                    value={input}
+                    onChange={(e) => setInput(e.target.value)}
+                    onKeyDown={handleKeyDown}
+                    disabled={isAnimating}
+                    autoComplete="off"
+                    spellCheck="false"
+                    className="w-full bg-transparent outline-none text-white caret-white"
+                  />
+                </form>
+
+                <span className="ml-1 w-[6px] h-[14px] bg-white animate-pulse" />
+              </div>
             </div>
           </div>
-        </div>
 
-        <p className="font-mono text-[11px] text-white/40 mt-4 text-center">
-          try: help · whoami · cat skills · sudo hire
-        </p>
+          {/* Hint */}
+          <p className="font-mono text-[11px] text-white/40 mt-4 text-center">
+            try: help · whoami · cat skills · sudo hire
+          </p>
+        </div>
       </motion.div>
     </SectionWrapper>
   )
