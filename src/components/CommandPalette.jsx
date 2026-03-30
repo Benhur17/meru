@@ -49,21 +49,22 @@ export default function CommandPalette() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
+            transition={{ duration: 0.12 }}
             onClick={() => { setOpen(false); setQuery('') }}
-            className="fixed inset-0 bg-black/60 backdrop-blur-sm z-[70]"
+            className="fixed inset-0 bg-black/70 backdrop-blur-sm z-[70]"
           />
 
           {/* Palette */}
           <motion.div
-            initial={{ opacity: 0, scale: 0.96, y: -10 }}
+            initial={{ opacity: 0, scale: 0.97, y: -8 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 0.96, y: -10 }}
-            transition={{ duration: 0.15 }}
-            className="fixed top-[20%] left-1/2 -translate-x-1/2 w-[90%] max-w-md bg-[#111] border border-[#333] rounded-xl overflow-hidden z-[80] shadow-2xl"
+            exit={{ opacity: 0, scale: 0.97, y: -8 }}
+            transition={{ duration: 0.12 }}
+            className="fixed top-[20%] left-1/2 -translate-x-1/2 w-[90%] max-w-md bg-[#0c0c0c] border border-white/[0.06] rounded-lg overflow-hidden z-[80] shadow-[0_25px_50px_-12px_rgba(0,0,0,0.8)] border-glow-green"
           >
-            <div className="flex items-center px-4 py-3 border-b border-[#222] gap-3">
+            <div className="flex items-center px-4 py-3 border-b border-white/[0.06] gap-3">
               <svg
-                className="w-4 h-4 text-text-muted shrink-0"
+                className="w-4 h-4 text-white/20 shrink-0"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -81,16 +82,16 @@ export default function CommandPalette() {
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
                 placeholder="Navigate to..."
-                className="flex-1 bg-transparent text-sm text-text outline-none placeholder:text-text-muted font-mono"
+                className="flex-1 bg-transparent text-sm text-white/90 outline-none placeholder:text-white/25 font-mono"
               />
-              <kbd className="text-[10px] font-mono text-text-muted bg-white/5 px-1.5 py-0.5 rounded border border-white/10">
+              <kbd className="text-[10px] font-mono text-white/25 bg-white/[0.03] px-1.5 py-0.5 rounded border border-white/[0.06]">
                 ESC
               </kbd>
             </div>
 
-            <div className="max-h-60 overflow-y-auto py-2">
+            <div className="max-h-60 overflow-y-auto py-1.5">
               {filtered.length === 0 ? (
-                <p className="text-sm text-text-muted text-center py-6">
+                <p className="text-sm text-white/30 text-center py-6 font-mono">
                   No results found.
                 </p>
               ) : (
@@ -98,10 +99,10 @@ export default function CommandPalette() {
                   <button
                     key={cmd.section}
                     onClick={() => handleNavigate(cmd.section)}
-                    className="w-full px-4 py-2.5 flex items-center justify-between text-left hover:bg-white/5 transition-colors"
+                    className="w-full px-4 py-2.5 flex items-center justify-between text-left hover:bg-[#00ff88]/[0.04] transition-colors duration-150"
                   >
-                    <span className="text-sm text-text">{cmd.label}</span>
-                    <kbd className="text-[10px] font-mono text-text-muted bg-white/5 px-1.5 py-0.5 rounded border border-white/10">
+                    <span className="text-sm text-white/70">{cmd.label}</span>
+                    <kbd className="text-[10px] font-mono text-white/20 bg-white/[0.03] px-1.5 py-0.5 rounded border border-white/[0.06]">
                       {cmd.keys}
                     </kbd>
                   </button>

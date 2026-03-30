@@ -5,12 +5,11 @@ export default function ScrollProgress() {
   const { scrollYProgress } = useScroll()
 
   const scaleX = useSpring(scrollYProgress, {
-    stiffness: 110,
+    stiffness: 120,
     damping: 30,
-    mass: 0.25,
+    mass: 0.2,
   })
 
-  // generate long binary string (so it fills full width)
   const binary = useMemo(() => {
     return Array.from({ length: 300 }, () =>
       Math.random() > 0.5 ? '1' : '0'
@@ -21,31 +20,34 @@ export default function ScrollProgress() {
     <>
       <style>{`
         .binary-line {
-          font-family: monospace;
-          font-size: 12px;
-          letter-spacing: 3px;
+          font-family: 'JetBrains Mono', monospace;
+          font-size: 11px;
+          letter-spacing: 2.5px;
           white-space: nowrap;
-          color: rgba(255,255,255,0.9);
         }
 
         .track {
-          color: rgba(255,255,255,0.08);
+          color: rgba(255,255,255,0.04);
+        }
+
+        .progress-text {
+          color: rgba(0, 255, 136, 0.6);
         }
       `}</style>
 
-      {/* Background (faint binary track) */}
-      <div className="fixed top-0 left-0 right-0 overflow-hidden h-[18px] z-[59]">
+      {/* Background track */}
+      <div className="fixed top-0 left-0 right-0 overflow-hidden h-[16px] z-[59]">
         <div className="binary-line track">
           {binary}
         </div>
       </div>
 
-      {/* Progress (revealed binary) */}
+      {/* Progress reveal */}
       <motion.div
         style={{ scaleX }}
-        className="fixed top-0 left-0 origin-left h-[18px] overflow-hidden z-[61]"
+        className="fixed top-0 left-0 origin-left h-[16px] overflow-hidden z-[61]"
       >
-        <div className="binary-line">
+        <div className="binary-line progress-text">
           {binary}
         </div>
       </motion.div>

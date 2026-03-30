@@ -22,7 +22,7 @@ const projects = [
   {
     title: 'TermFlow',
     description:
-      'A modern terminal emulator with AI-powered command suggestions and custom themes.',
+      'Modern terminal emulator with AI-powered command suggestions and custom themes.',
     tech: ['Rust', 'TypeScript', 'Electron', 'WebGL'],
     github: 'https://github.com',
     live: 'https://example.com',
@@ -30,106 +30,91 @@ const projects = [
   {
     title: 'PacketViz',
     description:
-      'Network packet visualization tool for debugging and monitoring network traffic in real-time.',
+      'Network packet visualization tool for debugging and monitoring traffic in real time.',
     tech: ['Python', 'React', 'WebSocket', 'Docker'],
-    github: 'https://github.com',
-    live: 'https://example.com',
-  },
-  {
-    title: 'Scriptly',
-    description:
-      'Collaborative code editor with live cursors, voice chat, and integrated CI/CD pipeline runner.',
-    tech: ['Vue.js', 'Go', 'Redis', 'WebRTC'],
-    github: 'https://github.com',
-    live: 'https://example.com',
-  },
-  {
-    title: 'InfraGraph',
-    description:
-      'Infrastructure-as-code visualizer that renders cloud architecture from Terraform configs.',
-    tech: ['TypeScript', 'Svelte', 'AWS CDK', 'GraphQL'],
     github: 'https://github.com',
     live: 'https://example.com',
   },
 ]
 
-function ArrowIcon() {
-  return (
-    <svg
-      className="w-4 h-4"
-      fill="none"
-      stroke="currentColor"
-      viewBox="0 0 24 24"
-    >
-      <path
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        strokeWidth={2}
-        d="M7 17L17 7M17 7H7M17 7v10"
-      />
-    </svg>
-  )
-}
-
 export default function Projects() {
   return (
     <SectionWrapper id="projects">
       <SectionHeader label="// projects" title="Selected Work" />
+      <br />
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
-        {projects.map((project, i) => (
-          <motion.div
-            key={project.title}
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: i * 0.08, duration: 0.4 }}
-            className="group bg-surface border border-border rounded-xl p-6 hover:border-accent/30 transition-all duration-300"
-          >
-            <div className="flex items-start justify-between mb-4">
-              <h3 className="text-lg font-semibold text-text group-hover:text-accent-light transition-colors">
-                {project.title}
-              </h3>
-              <div className="flex items-center gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
-                <a
-                  href={project.github}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-text-muted hover:text-text transition-colors"
-                  aria-label={`${project.title} GitHub`}
-                >
-                  <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z" />
-                  </svg>
-                </a>
-                <a
-                  href={project.live}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-text-muted hover:text-text transition-colors"
-                  aria-label={`${project.title} live demo`}
-                >
-                  <ArrowIcon />
-                </a>
-              </div>
-            </div>
+      <div className="w-full flex justify-center">
+        <div className="w-full max-w-[750px]">
 
-            <p className="text-sm text-text-muted mb-6 leading-relaxed">
-              {project.description}
-            </p>
+          {/* top line */}
+          <p className="font-mono text-[11px] text-white/30 mb-6 text-center tracking-wide">
+            <span className="text-[#00ff88]/40">meru@dev</span>
+            <span className="text-white/20">:</span>
+            <span className="text-white/25">~$</span>
+            <span className="text-white/40"> ls projects/</span>
+          </p>
 
-            <div className="flex flex-wrap gap-2">
-              {project.tech.map((t) => (
-                <span
-                  key={t}
-                  className="text-xs font-mono px-2.5 py-1 bg-white/5 text-text-muted rounded-md"
-                >
-                  {t}
-                </span>
-              ))}
-            </div>
-          </motion.div>
-        ))}
+          <div className="border-t border-white/[0.06]">
+
+            {projects.map((project, i) => (
+              <motion.div
+                key={project.title}
+                initial={{ opacity: 0, y: 10 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.05, duration: 0.25 }}
+                className="
+                  py-6
+                  border-b border-white/[0.06]
+                  group
+                "
+              >
+                {/* header line */}
+                <div className="flex items-center justify-between mb-2.5">
+
+                  <h3 className="
+                    font-mono text-sm sm:text-base
+                    text-white/85
+                    group-hover:text-[#00ff88]/80
+                    transition-colors duration-200
+                  ">
+                    {project.title}
+                  </h3>
+
+                  <div className="flex items-center gap-4 text-[11px] font-mono">
+                    <a
+                      href={project.github}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-white/30 hover:text-[#00ff88]/60 transition-colors duration-200"
+                    >
+                      [code]
+                    </a>
+                    <a
+                      href={project.live}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-white/30 hover:text-[#00ff88]/60 transition-colors duration-200"
+                    >
+                      [live]
+                    </a>
+                  </div>
+                </div>
+
+                {/* description */}
+                <p className="text-sm text-white/45 leading-relaxed mb-3 max-w-[600px]">
+                  {project.description}
+                </p>
+
+                {/* tech line */}
+                <div className="font-mono text-[11px] text-white/25 tracking-wide">
+                  {project.tech.join(' · ')}
+                </div>
+              </motion.div>
+            ))}
+
+          </div>
+        </div>
       </div>
     </SectionWrapper>
   )

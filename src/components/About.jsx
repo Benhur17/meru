@@ -1,81 +1,71 @@
-import { motion } from 'framer-motion'
-import SectionWrapper from './SectionWrapper'
-import SectionHeader from './SectionHeader'
+import { motion } from "framer-motion";
+import SectionWrapper from "./SectionWrapper";
+import SectionHeader from "./SectionHeader";
 
 const infoItems = [
-  { label: 'Experience', value: '3+ Years' },
-  { label: 'Focus', value: 'Full Stack Systems' },
-  { label: 'Education', value: 'Computer Science' },
-  { label: 'Location', value: 'India' },
-]
+  { label: "Experience", value: "3+ Years" },
+  { label: "Focus", value: "Full Stack Systems" },
+  { label: "Education", value: "Computer Science" },
+  { label: "Location", value: "India" },
+];
 
 export default function About() {
   return (
     <SectionWrapper id="about">
       <SectionHeader label="// about" title="Who I Am" />
+      <br />
 
-      {/* 🔥 Centered Content */}
-      <div className="
-        w-full 
-        flex flex-col items-center
-        px-4 sm:px-6
-        mb-14 sm:mb-16
-      ">
-        <div className="w-full max-w-[720px] text-center">
-
+      <div className="w-full flex justify-center mb-12 sm:mb-14">
+        <div className="w-full max-w-[680px]">
           {/* terminal hint */}
-          <p className="font-mono text-xs text-white/40 mb-6">
-            <span className="text-white/30">meru@dev:~$</span> cat about.txt
+          <p className="font-mono text-[11px] text-white/30 mb-6 text-center tracking-wide">
+            <span className="text-[#00ff88]/40">meru@dev</span>
+            <span className="text-white/20">:</span>
+            <span className="text-white/25">~$</span>
+            <span className="text-white/40"> cat about.txt</span>
           </p>
 
-          <p className="text-lg sm:text-xl text-white/90 leading-relaxed mb-5">
-            I design and build systems that are fast, reliable, and easy to use.
-            Every detail is intentional, from architecture to interaction.
-          </p>
-
-          <p className="text-sm sm:text-base text-white/60 leading-relaxed">
-            Computer Science engineer focused on clean structure, scalable design,
-            and developer experience. I care about how software feels, not just how it works.
-          </p>
+          {/* main text */}
+          <div className="text-center">
+            <p className="text-sm sm:text-base text-white/45 leading-relaxed">
+              With a foundation in Computer Science, I focus on writing clean,
+              efficient code and crafting seamless user experiences. I care
+              about structure, performance, and building software that feels
+              intuitive, not just functional.
+            </p>
+            <br /> 
+          </div>
         </div>
       </div>
 
-      {/* 🔥 Centered Grid */}
-      <div className="w-full flex justify-center px-4 sm:px-6">
-        <div className="
-          w-full max-w-[820px]
-          grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4
-          gap-3 sm:gap-4 md:gap-5
-        ">
+      {/* Structured Info */}
+      <div className="w-full flex justify-center">
+        <div className="w-full max-w-[680px] border-t border-white/[0.06]">
           {infoItems.map((item, i) => (
             <motion.div
               key={item.label}
-              initial={{ opacity: 0, y: 16 }}
+              initial={{ opacity: 0, y: 10 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: i * 0.08, duration: 0.35 }}
+              transition={{ delay: i * 0.05, duration: 0.25 }}
               className="
-                border border-white/10
-                bg-white/[0.02]
-                backdrop-blur
-                rounded-lg
-                px-4 py-4 sm:px-5 sm:py-5
-                text-center
-                hover:border-white/20
-                transition
+                flex items-center justify-between
+                py-4
+                border-b border-white/[0.06]
+                group
               "
             >
-              <p className="font-mono text-[10px] sm:text-[11px] text-white/40 uppercase tracking-wider mb-1.5">
+              <span className="font-mono text-[11px] text-white/30 uppercase tracking-[0.15em]">
                 {item.label}
-              </p>
+              </span>
 
-              <p className="text-sm sm:text-base text-white/90 font-medium">
+              <span className="text-sm sm:text-base text-white/80 group-hover:text-[#00ff88]/70 transition-colors duration-200">
                 {item.value}
-              </p>
+              </span>
             </motion.div>
           ))}
         </div>
       </div>
     </SectionWrapper>
-  )
+  );
 }

@@ -9,11 +9,11 @@ const skillCategories = [
   },
   {
     title: 'Frontend',
-    items: ['React', 'Next.js', 'Vue.js', 'Tailwind CSS', 'Framer Motion', 'Three.js'],
+    items: ['React', 'Next.js', 'Vue', 'Tailwind', 'Framer Motion', 'Three.js'],
   },
   {
     title: 'Backend',
-    items: ['Node.js', 'Express', 'FastAPI', 'PostgreSQL', 'MongoDB', 'Redis', 'GraphQL'],
+    items: ['Node', 'Express', 'FastAPI', 'PostgreSQL', 'MongoDB', 'Redis', 'GraphQL'],
   },
   {
     title: 'Tools',
@@ -25,32 +25,47 @@ export default function Skills() {
   return (
     <SectionWrapper id="skills">
       <SectionHeader label="// skills" title="Tech Stack" />
+      <br />
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-        {skillCategories.map((cat, i) => (
-          <motion.div
-            key={cat.title}
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: i * 0.1, duration: 0.4 }}
-            className="bg-surface border border-border rounded-xl p-6"
-          >
-            <h3 className="font-mono text-xs text-accent-light tracking-widest uppercase mb-4">
-              {cat.title}
-            </h3>
-            <div className="flex flex-wrap gap-2">
-              {cat.items.map((item) => (
-                <span
-                  key={item}
-                  className="text-sm font-mono px-3 py-1.5 bg-white/5 text-text-muted rounded-lg hover:text-text hover:bg-white/10 transition-colors cursor-default"
-                >
-                  {item}
-                </span>
-              ))}
-            </div>
-          </motion.div>
-        ))}
+      <div className="w-full flex justify-center">
+        <div className="w-full max-w-[800px]">
+
+          <div className="border-t border-white/[0.06]" />
+
+          {skillCategories.map((cat, i) => (
+            <motion.div
+              key={cat.title}
+              initial={{ opacity: 0, y: 12 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: i * 0.06, duration: 0.3 }}
+              className="
+                grid grid-cols-1 sm:grid-cols-[120px_1fr]
+                gap-3 sm:gap-8
+                py-5 sm:py-6
+                border-b border-white/[0.06]
+              "
+            >
+              {/* left label */}
+              <div className="font-mono text-[11px] text-[#00ff88]/40 uppercase tracking-[0.15em]">
+                {cat.title}
+              </div>
+
+              {/* right content */}
+              <div className="flex flex-wrap gap-x-4 gap-y-2.5 text-sm text-white/60">
+                {cat.items.map((item) => (
+                  <span
+                    key={item}
+                    className="hover:text-white/90 transition-colors duration-200 cursor-default"
+                  >
+                    {item}
+                  </span>
+                ))}
+              </div>
+            </motion.div>
+          ))}
+
+        </div>
       </div>
     </SectionWrapper>
   )

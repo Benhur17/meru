@@ -4,24 +4,29 @@ import SectionHeader from './SectionHeader'
 
 const links = [
   {
-    label: 'Email',
-    value: 'benhur@example.com',
-    href: 'mailto:benhur@example.com',
+    label: 'email',
+    value: 'heudimeru17@gmail.com',
+    href: 'mailto:heudimeru17@gmail.com',
   },
   {
-    label: 'GitHub',
+    label: 'github',
     value: 'github.com/benhur',
-    href: 'https://github.com/benhur',
+    href: 'https://github.com/benhur17',
   },
   {
-    label: 'LinkedIn',
-    value: 'linkedin.com/in/benhur',
-    href: 'https://linkedin.com/in/benhur',
+    label: 'linkedin',
+    value: 'linkedin.com/in/Heudigwangbe Meru',
+    href: 'https://linkedin.com/in/Heudigwangbe Meru',
   },
   {
-    label: 'Resume',
-    value: 'Download PDF',
-    href: '/resume.pdf',
+    label: 'instagram',
+    value: 'instagram.com/heudi_meru',
+    href: 'https://instagram.com/heudi_meru',
+  },
+  {
+    label: 'resume',
+    value: 'resume.pdf',
+    href: 'src/docs/resume.pdf',
     download: true,
   },
 ]
@@ -30,58 +35,68 @@ export default function Contact() {
   return (
     <SectionWrapper id="contact">
       <SectionHeader label="// contact" title="Get In Touch" />
+      <br />
 
-      <div className="text-center max-w-xl mx-auto mb-16">
-        <p className="text-sm sm:text-base text-text-muted leading-relaxed">
-          I&apos;m always open to new opportunities, collaborations, or just a good
-          conversation about technology. Feel free to reach out.
-        </p>
-      </div>
+      <div className="w-full flex justify-center">
+        <div className="w-full max-w-[680px]">
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-2xl mx-auto mb-16">
-        {links.map((link, i) => (
-          <motion.a
-            key={link.label}
-            href={link.href}
-            target={link.download ? undefined : '_blank'}
-            rel={link.download ? undefined : 'noopener noreferrer'}
-            download={link.download ? true : undefined}
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: i * 0.1, duration: 0.4 }}
-            className="group bg-surface border border-border rounded-xl p-5 flex items-center justify-between hover:border-accent/30 transition-all duration-300"
-          >
-            <div>
-              <p className="font-mono text-xs text-text-muted uppercase tracking-wider mb-1">
-                {link.label}
-              </p>
-              <p className="text-sm text-text group-hover:text-accent-light transition-colors">
-                {link.value}
-              </p>
-            </div>
-            <svg
-              className="w-4 h-4 text-text-muted group-hover:text-accent-light transition-colors"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M7 17L17 7M17 7H7M17 7v10"
-              />
-            </svg>
-          </motion.a>
-        ))}
-      </div>
+          {/* terminal intro */}
+          <p className="font-mono text-[11px] text-white/30 mb-6 text-center tracking-wide">
+            <span className="text-[#00ff88]/40">meru@dev</span>
+            <span className="text-white/20">:</span>
+            <span className="text-white/25">~$</span>
+            <span className="text-white/40"> cat contact.txt</span>
+          </p>
 
-      {/* Footer */}
-      <div className="text-center pt-16 pb-8 border-t border-border">
-        <p className="font-mono text-xs text-text-muted">
-          Designed & built by Benhur — {new Date().getFullYear()}
-        </p>
+          {/* message */}
+          <div className="text-center mb-10">
+            <p className="text-sm sm:text-base text-white/45 leading-relaxed mx-auto">
+              Open to opportunities, collaborations, or conversations around building
+              meaningful software.
+            </p>
+          </div>
+
+          {/* contact list */}
+          <div className="border-t border-white/[0.06]">
+            {links.map((link, i) => (
+              <motion.a
+                key={link.label}
+                href={link.href}
+                target={link.download ? undefined : '_blank'}
+                rel={link.download ? undefined : 'noopener noreferrer'}
+                download={link.download ? true : undefined}
+                initial={{ opacity: 0, y: 10 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.05, duration: 0.25 }}
+                className="
+                  flex items-center justify-between
+                  py-4
+                  border-b border-white/[0.06]
+                  group
+                "
+              >
+                <span className="font-mono text-[11px] text-white/30 uppercase tracking-[0.15em]">
+                  {link.label}
+                </span>
+
+                <span className="text-sm text-white/60 group-hover:text-[#00ff88]/70 transition-colors duration-200">
+                  {link.value}
+                </span>
+              </motion.a>
+            ))}
+          </div>
+          
+          <br />
+
+          {/* footer */}
+          <div className="text-center mt-14 pt-6 border-t border-white/[0.06]">
+            <p className="font-mono text-[11px] text-white/25 tracking-wide">
+              built by <span className="text-[#00ff88]/30">meru</span> © {new Date().getFullYear()}
+            </p>
+          </div>
+
+        </div>
       </div>
     </SectionWrapper>
   )

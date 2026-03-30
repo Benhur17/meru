@@ -2,10 +2,10 @@ import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 
 const roles = [
-  'Full Stack Developer',
-  'Systems Thinker',
-  'Open Source Contributor',
-  'Problem Solver',
+  'Full Stack Engineer',
+  'Digital Craftsman',
+  'Clean Code Advocate',
+  'Performance-Driven Developer',
 ]
 
 export default function Hero() {
@@ -29,7 +29,7 @@ export default function Hero() {
             ? currentRole.slice(0, text.length - 1)
             : currentRole.slice(0, text.length + 1)
         )
-      }, isDeleting ? 40 : 70)
+      }, isDeleting ? 35 : 60)
     }
 
     return () => clearTimeout(timeout)
@@ -40,44 +40,47 @@ export default function Hero() {
       id="hero"
       className="
         min-h-screen flex items-center justify-center
-        px-4 sm:px-6 md:px-[clamp(1rem,4vw,2.5rem)]
-        relative overflow-hidden
+        px-5 sm:px-8 lg:px-12
+        relative overflow-hidden grid-bg
       "
     >
-      {/* subtle grid / system background */}
-      <div className="absolute inset-0 opacity-[0.03] pointer-events-none">
-        <div className="w-full h-full bg-[linear-gradient(to_right,white_1px,transparent_1px),linear-gradient(to_bottom,white_1px,transparent_1px)] bg-[size:40px_40px]" />
+      {/* Radial glow from center */}
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[radial-gradient(circle,rgba(0,255,136,0.04)_0%,transparent_70%)]" />
       </div>
 
       <div className="w-full max-w-[900px] mx-auto relative z-10">
 
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7 }}
+          transition={{ duration: 0.6, ease: 'easeOut' }}
           className="text-center"
         >
 
           {/* Terminal-style intro */}
-          <p className="font-mono text-xs text-white/50 mb-6">
-            <span className="text-white/40">meru@dev:~$</span> whoami
+          <p className="font-mono text-[11px] text-white/40 mb-8 tracking-wide">
+            <span className="text-[#00ff88]/50">meru@dev</span>
+            <span className="text-white/25">:</span>
+            <span className="text-white/30">~$</span>
+            <span className="text-white/50"> whoami</span>
           </p>
 
           {/* Name */}
           <h1 className="
             text-4xl sm:text-6xl lg:text-7xl
             font-semibold tracking-tight text-white
-            mb-6
+            mb-6 leading-[1.1]
           ">
-            Benhur
+            Heudigwangbe Meru
           </h1>
 
           {/* Role (typing effect) */}
-          <div className="h-8 sm:h-10 flex items-center justify-center mb-10">
-            <span className="font-mono text-sm sm:text-base text-white/70">
+          <div className="h-8 sm:h-10 flex items-center justify-center mb-12">
+            <span className="font-mono text-sm sm:text-base text-[#00ff88]/70">
               {text}
             </span>
-            <span className="ml-1 w-[1px] h-5 bg-white animate-pulse" />
+            <span className="ml-0.5 w-[2px] h-5 bg-[#00ff88]/80 animate-pulse" />
           </div>
 
           {/* CTA (command style) */}
@@ -87,11 +90,11 @@ export default function Hero() {
               href="#projects"
               className="
                 font-mono text-sm
-                px-5 py-2.5
-                border border-white/10
-                text-white/80
-                hover:text-white hover:border-white/20
-                transition
+                px-6 py-2.5
+                border border-[#00ff88]/20
+                text-[#00ff88]/80
+                hover:text-[#00ff88] hover:border-[#00ff88]/40 hover:bg-[#00ff88]/5
+                transition-all duration-200
               "
             >
               {'> view_projects'}
@@ -101,11 +104,11 @@ export default function Hero() {
               href="#terminal"
               className="
                 font-mono text-sm
-                px-5 py-2.5
-                border border-white/10
-                text-white/60
-                hover:text-white hover:border-white/20
-                transition
+                px-6 py-2.5
+                border border-white/8
+                text-white/50
+                hover:text-white/80 hover:border-white/15
+                transition-all duration-200
               "
             >
               {'> open_terminal'}
@@ -114,17 +117,17 @@ export default function Hero() {
           </div>
         </motion.div>
 
-        {/* Scroll hint (cleaner) */}
+        {/* Scroll hint */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ delay: 1 }}
-          className="absolute bottom-6 left-1/2 -translate-x-1/2"
+          transition={{ delay: 1.2, duration: 0.5 }}
+          className="absolute -bottom-16 left-1/2 -translate-x-1/2"
         >
           <motion.div
-            animate={{ y: [0, 6, 0] }}
-            transition={{ duration: 2, repeat: Infinity }}
-            className="text-white/30 font-mono text-xs"
+            animate={{ y: [0, 5, 0] }}
+            transition={{ duration: 2.5, repeat: Infinity, ease: 'easeInOut' }}
+            className="text-[#00ff88]/25 font-mono text-[11px] tracking-wider"
           >
             ↓ scroll
           </motion.div>

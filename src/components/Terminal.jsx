@@ -37,7 +37,6 @@ const COMMANDS = {
     'drwxr-xr-x  skills/',
     'drwxr-xr-x  contact/',
     '-rw-r--r--  resume.pdf',
-    '-rw-r--r--  README.md',
   ],
 
   'cd about': () => {
@@ -64,17 +63,18 @@ const COMMANDS = {
   resume: () => {
     setTimeout(() => {
       const link = document.createElement('a')
-      link.href = '/resume.pdf'
-      link.download = 'meru_resume.pdf'
+      link.href = '/src/docs/resume.pdf'
+      link.download = 'resume.pdf'
       link.click()
     }, 300)
     return ['Downloading resume...']
   },
 
   contact: () => [
-    'Email     meru@gmail.com',
-    'GitHub    github.com/meru',
-    'LinkedIn  linkedin.com/in/meru',
+    'Email     heudimeru17@gmail.com',
+    'GitHub    github.com/benhur17',
+    'LinkedIn  linkedin.com/in/Heudigwangbe Meru',
+    'Instagram instagram.com/heudi_meru',
     '',
     'Feel free to reach out!',
   ],
@@ -84,7 +84,7 @@ const COMMANDS = {
     '✓ Permission granted.',
     '',
     "Let's build something great together.",
-    '→ meru@gmail.com',
+    '→ heudimeru17@gmail.com',
     '',
   ],
 }
@@ -119,7 +119,7 @@ export default function Terminal() {
   const typeOutput = useCallback(async (outputLines) => {
     setIsAnimating(true)
     for (const line of outputLines) {
-      await new Promise((resolve) => setTimeout(resolve, 25))
+      await new Promise((resolve) => setTimeout(resolve, 20))
       setLines((prev) => [...prev, line])
     }
     setLines((prev) => [...prev, ''])
@@ -204,32 +204,33 @@ export default function Terminal() {
   const focusInput = () => inputRef.current?.focus()
 
   return (
-    
     <SectionWrapper id="terminal">
-    
       <SectionHeader label="// terminal" title="Interactive Shell" />
+      <br />
 
       <motion.div
-        initial={{ opacity: 0, y: 20 }}
+        initial={{ opacity: 0, y: 16 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
-        className="w-full flex justify-center px-4 sm:px-6 md:px-0"
+        transition={{ duration: 0.4 }}
+        className="w-full flex justify-center"
       >
-        <div className="w-full max-w-[1100px]">
+        <div className="w-full max-w-[900px]">
 
           {/* Terminal Window */}
-          <div className="rounded-xl border border-white/10 bg-black/80 backdrop-blur overflow-hidden shadow-[0_0_0_1px_rgba(255,255,255,0.03)]">
+          <div className="rounded-lg border border-white/[0.06] bg-[#0c0c0c] overflow-hidden border-glow-green">
 
             {/* Title Bar */}
-            <div className="flex items-center justify-between px-4 py-2 border-b border-white/10 bg-white/5">
+            <div className="flex items-center justify-between px-4 py-2.5 border-b border-white/[0.06] bg-white/[0.02]">
               <div className="flex gap-2">
-                <div className="w-2.5 h-2.5 rounded-full bg-red-500/80" />
-                <div className="w-2.5 h-2.5 rounded-full bg-yellow-400/80" />
-                <div className="w-2.5 h-2.5 rounded-full bg-green-500/80" />
+                <div className="w-2.5 h-2.5 rounded-full bg-[#ff5f57]/80" />
+                <div className="w-2.5 h-2.5 rounded-full bg-[#febc2e]/80" />
+                <div className="w-2.5 h-2.5 rounded-full bg-[#28c840]/80" />
               </div>
-              <span className="font-mono text-[11px] text-white/40">
-                terminal — bash
+              <span className="font-mono text-[11px] text-white/25 tracking-wide">
+                terminal - bash
               </span>
+              <div className="w-[52px]" />
             </div>
 
             {/* Body */}
@@ -237,12 +238,12 @@ export default function Terminal() {
               ref={containerRef}
               onClick={focusInput}
               className="
-                px-4 sm:px-6
-                py-4 sm:py-5
-                h-[260px] 
-                sm:h-[340px] 
-                md:h-[480px]
-                lg:h-[560px]
+                px-4 sm:px-5
+                py-4
+                h-[240px]
+                sm:h-[320px]
+                md:h-[420px]
+                lg:h-[480px]
                 overflow-y-auto
                 font-mono
                 text-[11px] sm:text-xs
@@ -254,30 +255,30 @@ export default function Terminal() {
                 <div key={i} className="whitespace-pre-wrap break-words">
                   {line.startsWith(PROMPT) ? (
                     <>
-                      <span className="text-white">meru</span>
-                      <span className="text-white/40">@</span>
-                      <span className="text-white/70">dev</span>
-                      <span className="text-white/40">:</span>
-                      <span className="text-white/60">~</span>
-                      <span className="text-white/40">$ </span>
-                      <span className="text-white/80">
+                      <span className="text-[#00ff88]/80">meru</span>
+                      <span className="text-white/25">@</span>
+                      <span className="text-white/50">dev</span>
+                      <span className="text-white/25">:</span>
+                      <span className="text-white/40">~</span>
+                      <span className="text-white/25">$ </span>
+                      <span className="text-white/75">
                         {line.slice(PROMPT.length)}
                       </span>
                     </>
                   ) : (
-                    <span className="text-white/60">{line}</span>
+                    <span className="text-white/45">{line}</span>
                   )}
                 </div>
               ))}
 
               {/* Input */}
               <div className="flex items-center">
-                <span className="text-white">meru</span>
-                <span className="text-white/40">@</span>
-                <span className="text-white/70">dev</span>
-                <span className="text-white/40">:</span>
-                <span className="text-white/60">~</span>
-                <span className="text-white/40">$ </span>
+                <span className="text-[#00ff88]/80">meru</span>
+                <span className="text-white/25">@</span>
+                <span className="text-white/50">dev</span>
+                <span className="text-white/25">:</span>
+                <span className="text-white/40">~</span>
+                <span className="text-white/25">$ </span>
 
                 <form onSubmit={handleSubmit} className="flex-1">
                   <input
@@ -288,18 +289,18 @@ export default function Terminal() {
                     disabled={isAnimating}
                     autoComplete="off"
                     spellCheck="false"
-                    className="w-full bg-transparent outline-none text-white caret-white"
+                    className="w-full bg-transparent outline-none text-white/90 caret-[#00ff88]"
                   />
                 </form>
 
-                <span className="ml-1 w-[6px] h-[14px] bg-white animate-pulse" />
+                <span className="ml-1 w-[6px] h-[14px] bg-[#00ff88]/80 animate-pulse" />
               </div>
             </div>
           </div>
 
           {/* Hint */}
-          <p className="font-mono text-[11px] text-white/40 mt-4 text-center">
-            try: help · whoami · cat skills · sudo hire
+          <p className="font-mono text-[11px] text-white/20 mt-4 text-center tracking-wide">
+            try: <span className="text-white/30">help</span> · <span className="text-white/30">whoami</span> · <span className="text-white/30">cat skills</span> · <span className="text-white/30">sudo hire</span>
           </p>
         </div>
       </motion.div>
