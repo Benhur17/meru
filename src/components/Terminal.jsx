@@ -24,8 +24,8 @@ const COMMANDS = {
   ],
 
   whoami: () => [
-    'Meru - Computer Science Engineer',
-    'Full Stack Developer | Systems Thinker | Open Source Contributor',
+    'Heudigwangbe Meru - Computer Science Engineer',
+    'Full Stack Engineer | Clean Code Advocate | Performance-Driven Developer',
     '',
     'I build performant, accessible software with precision.',
     'Currently focused on scalable systems and developer tools.',
@@ -73,7 +73,7 @@ const COMMANDS = {
   contact: () => [
     'Email     heudimeru17@gmail.com',
     'GitHub    github.com/benhur17',
-    'LinkedIn  linkedin.com/in/Heudigwangbe Meru',
+    'LinkedIn  linkedin.com/in/heudigwangbe-meru',
     'Instagram instagram.com/heudi_meru',
     '',
     'Feel free to reach out!',

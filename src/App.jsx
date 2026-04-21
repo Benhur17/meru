@@ -19,7 +19,7 @@ function App() {
       <main>
         <Hero />          {/* First impression */}
         
-        <Terminal />      {/* Identity / WOW factor */}
+        <Terminal />      {/* Identity */}
 
         <About />         {/* Who you are */}
 
